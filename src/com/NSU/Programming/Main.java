@@ -1,4 +1,4 @@
-package com.company.NSU;
+package com.NSU.Programming;
 
 import java.util.ArrayList;
 
