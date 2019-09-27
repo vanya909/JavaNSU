@@ -1,5 +1,7 @@
 package com.NSU.CW;
 
+import java.util.ArrayList;
+
 public class Lagrange {
 
     public static double polynomial2(double x, double x0, double h) {
@@ -9,10 +11,10 @@ public class Lagrange {
     }
 
     public static double polynomial3(double x, double x0, double h) {
-        return -func(x0-3*h)*(x-x0+h)*(x-x0-h)*(x-x0-3*h) / 48*h*h*h +
-                func(x0-h)*(x-x0+3*h)*(x-x0-h)*(x-x0-3*h) / 16*h*h*h -
-                func(x0+h)*(x-x0+3*h)*(x-x0+h)*(x-x0-3*h) / 16*h*h*h +
-                func(x0+3*h)*(x-x0+3*h)*(x-x0+h)*(x-x0-h) / 48*h*h*h;
+        return -func(x0-3*h)*(x-x0+h)*(x-x0-h)*(x-x0-3*h) / (48*h*h*h) +
+                func(x0-h)*(x-x0+3*h)*(x-x0-h)*(x-x0-3*h) / (16*h*h*h) -
+                func(x0+h)*(x-x0+3*h)*(x-x0+h)*(x-x0-3*h) / (16*h*h*h) +
+                func(x0+3*h)*(x-x0+3*h)*(x-x0+h)*(x-x0-h) / (48*h*h*h);
     }
 
     public static double rh2(double x, double x0, double h) {
@@ -25,6 +27,19 @@ public class Lagrange {
 
     private static double func(double x) {
         return Math.exp(x);
+    }
+
+    public static double m(ArrayList<Double> errors) {
+        double errAbsRelation = Math.abs( errors.get(errors.size()-2) / errors.get(errors.size()-1) );
+
+        return Math.log(errAbsRelation) / Math.log(2); // Переход к новому основанию логарифма
+    }
+
+    public static double n(ArrayList<Double> errors) {
+        double lastErrDifference = Math.abs(errors.get(errors.size()-3) - errors.get(errors.size()-2));
+        double errDifference = Math.abs(errors.get(errors.size()-2) - errors.get(errors.size()-1));
+
+        return Math.log(lastErrDifference / errDifference) / Math.log(2);
     }
 
     private Lagrange() {}
