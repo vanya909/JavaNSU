@@ -1,4 +1,4 @@
-package com.NSU.Programming;
+package ru.nsu.programming.studentsBooks;
 
 import java.util.ArrayList;
 

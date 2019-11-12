@@ -1,4 +1,4 @@
-package com.NSU.Programming;
+package ru.nsu.programming.studentsBooks;
 
 public class Book {
     private int publicationYear;
