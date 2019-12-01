@@ -1,4 +1,4 @@
-package ru.nsu.programming.studentsBooks;
+package ru.nsu.programming.students_books;
 
 public class Magazine extends Book{
     private int publicationNumber;

@@ -16,10 +16,10 @@ public class Lagrange {
                 func(x0+3*h)*(x-x0+3*h)*(x-x0+h)*(x-x0-h) / (48*h*h*h);
     }
 
-    private static double rh2(double x, double x0, double h) {
+    static double rh2(double x, double x0, double h) {
         return func(x) - polynomial2(x, x0, h);
     }
-    private static double rh3(double x, double x0, double h) {
+    static double rh3(double x, double x0, double h) {
         return func(x) - polynomial3(x, x0, h);
     }
     public static double error(double x, double x0, double h) {
