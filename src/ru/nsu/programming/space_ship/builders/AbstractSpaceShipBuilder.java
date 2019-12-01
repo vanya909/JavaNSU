@@ -1,18 +1,21 @@
 package ru.nsu.programming.space_ship.builders;
 import ru.nsu.programming.space_ship.*;
-import ru.nsu.programming.space_ship.Body;
-import ru.nsu.programming.space_ship.fuel_tank_and_modules.FuelTank;
+import ru.nsu.programming.space_ship.body.Body;
+import ru.nsu.programming.space_ship.engine.AbstractEngine;
+import ru.nsu.programming.space_ship.engine.Engine;
+import ru.nsu.programming.space_ship.fuel_tank.AbstractFuelTank;
+import ru.nsu.programming.space_ship.fuel_tank.FuelTank;
 
 public abstract class AbstractSpaceShipBuilder {
-    Engine engine;
-    FuelTank fuelTank;
+    AbstractEngine engine;
+    AbstractFuelTank fuelTank;
     Body body;
 
-    public AbstractSpaceShipBuilder setEngine(Engine engine) {
+    public AbstractSpaceShipBuilder setEngine(AbstractEngine engine) {
         this.engine = engine;
         return this;
     }
-    public AbstractSpaceShipBuilder setFuelTank(FuelTank fuelTank) {
+    public AbstractSpaceShipBuilder setFuelTank(AbstractFuelTank fuelTank) {
         this.fuelTank = fuelTank;
         return this;
     }
@@ -33,10 +36,10 @@ public abstract class AbstractSpaceShipBuilder {
         } else if (fuelTank == null) {
             return Error.NO_FUEL_TANK;
 
-        } else if (body.getMaxEngineWeight() >= engine.getWeight()) {
+        } else if (body.getMaxEngineWeight() < engine.getWeight()) {
             return Error.ENGINE_CANT_BE_INSTALLED;
 
-        } else if (body.getMaxFuelTankWeight() >= fuelTank.getWeight()) {
+        } else if (body.getMaxFuelTankWeight() < fuelTank.getWeight()) {
             return Error.FUEL_TANK_CANT_BE_INSTALLED;
 
         } else if (body.getMaxWeight() < body.getWeight() + engine.getWeight() + fuelTank.getWeight()) {

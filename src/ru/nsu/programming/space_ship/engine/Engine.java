@@ -1,6 +1,8 @@
-package ru.nsu.programming.space_ship;
+package ru.nsu.programming.space_ship.engine;
 
-public class Engine {
+import ru.nsu.programming.space_ship.Brand;
+
+public class Engine extends AbstractEngine {
     private final int weight;
     private final int throttle;
     private final int speed;
@@ -9,7 +11,7 @@ public class Engine {
     private final int durability;
     private final Brand brand;
 
-    public Engine(int weight, int throttle, int speed, int hyperJumpDistance, int cost, int durability, Brand brand) {
+    Engine(int weight, int throttle, int speed, int hyperJumpDistance, int cost, int durability, Brand brand) {
         this.weight = weight;
         this.throttle = throttle;
         this.speed = speed;

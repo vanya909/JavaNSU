@@ -1,4 +1,7 @@
-package ru.nsu.programming.space_ship;
+package ru.nsu.programming.space_ship.body;
+
+import ru.nsu.programming.space_ship.Brand;
+import ru.nsu.programming.space_ship.Color;
 
 public class Body {
     private final int weight;
@@ -9,7 +12,7 @@ public class Body {
     private final Color color;
     private final Brand brand;
 
-    private Body(int weight, int maxWeight,
+    Body(int weight, int maxWeight,
                  int maxEngineWeight, int maxFuelTankWeight,
                  int cost, Color color, Brand brand) {
         this.weight = weight;
@@ -19,19 +22,6 @@ public class Body {
         this.cost = cost;
         this.color = color;
         this.brand = brand;
-    }
-
-
-    public static Body getBody(int weight, int maxWeight,
-                               int maxEngineWeight, int maxFuelTankWeight,
-                               int cost, Color color, Brand brand) {
-        if (weight > 0 && maxWeight > weight && maxEngineWeight > 0 &&
-            maxFuelTankWeight > 0 && maxFuelTankWeight + maxEngineWeight < maxWeight &&
-            cost >= 0 && color != null && brand != null) {
-            return new Body(weight, maxWeight, maxEngineWeight, maxFuelTankWeight, cost, color, brand);
-        } else {
-            return null;
-        }
     }
 
     public int getWeight() {
@@ -72,11 +62,14 @@ public class Body {
           .append("For fuel tank this size is - ").append(maxFuelTankWeight).append('\n')
           .append("It will cost you ").append(cost).append('\n')
           .append("The color is ").append(color).append('\n')
-          .append("This body made by ").append(brand).append('©').append('\n');
+          .append('©').append(' ').append("This body was made by ").append(brand).append('\n');
 
         return sb.toString();
     }
 
+    public Body repaint(Color color) {
+        return new Body(weight, maxWeight, maxEngineWeight, maxFuelTankWeight, cost, color, brand);
+    }
     public Body clone() {
         return new Body(weight, maxWeight, maxEngineWeight, maxFuelTankWeight, cost, color, brand);
     }

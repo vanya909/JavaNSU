@@ -1,30 +1,29 @@
-package ru.nsu.programming.space_ship.fuel_tank_and_modules;
+package ru.nsu.programming.space_ship.fuel_tank;
 
 import ru.nsu.programming.space_ship.Brand;
 
 public class FuelTank extends AbstractFuelTank {
 
-    private int weight;
-    private int capacity;
-    private int cost;
-    private int durability;
+    private final int weight;
+    private final int capacity;
+    private final int cost;
+    private final int durability;
     private int fuel;
-    private Brand brand;
+    private final Brand brand;
 
-    public FuelTank(int weight, int capacity, int cost, int durability, int fuel, Brand brand) {
+    FuelTank(int weight, int capacity, int cost, int durability, Brand brand) {
         this.weight = weight;
         this.capacity = capacity;
         this.cost = cost;
         this.durability = durability;
-        this.fuel = fuel;
+        this.fuel = 0;
         this.brand = brand;
     }
 
-
-    public void refuel(int n) {
-
+    @Override
+    protected void setFuel(int n) {
+        fuel = n;
     }
-
 
     public int getModulesCount() {
         return 1;
@@ -55,6 +54,9 @@ public class FuelTank extends AbstractFuelTank {
     }
 
     public FuelTank clone() {
-        return new FuelTank(weight, capacity, cost, durability, fuel, brand);
+        FuelTank tmp = new FuelTank(weight, capacity, cost, durability, brand);
+        tmp.setFuel(this.getFuel());
+
+        return tmp;
     }
 }

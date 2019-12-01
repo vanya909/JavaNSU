@@ -1,17 +1,23 @@
-package ru.nsu.programming.space_ship.fuel_tank_and_modules;
+package ru.nsu.programming.space_ship.fuel_tank;
 
 import ru.nsu.programming.space_ship.Brand;
 
-public class MiniFuelTank extends Decorator {
-    AbstractFuelTank fuelTank;
+public class MiniFuelTank extends AbstractFuelTank {
+    private AbstractFuelTank fuelTank;
     private Brand brand;
+    private int fuel;
 
-    public int fuel;
 
-
-    public MiniFuelTank(Brand brand, AbstractFuelTank fuelTank) {
+    MiniFuelTank(Brand brand, AbstractFuelTank fuelTank) {
         this.fuelTank = fuelTank;
         this.brand = brand;
+        this.fuel = fuelTank.getFuel();
+    }
+
+
+    @Override
+    protected void setFuel(int n) {
+        fuel = n;
     }
 
     @Override
@@ -21,7 +27,7 @@ public class MiniFuelTank extends Decorator {
 
     @Override
     public int getCapacity() {
-        return fuelTank.getCapacity() + (int) (200 * brand.COEFFICIENT);
+        return fuelTank.getCapacity() + (int) (1250 * brand.COEFFICIENT);
     }
 
     @Override
@@ -31,7 +37,7 @@ public class MiniFuelTank extends Decorator {
 
     @Override
     public int getFuel() {
-        return fuelTank.getFuel();
+        return fuel;
     }
 
     @Override
@@ -41,12 +47,12 @@ public class MiniFuelTank extends Decorator {
 
     @Override
     public int getWeight() {
-        return fuelTank.getWeight() + (int) (50 * brand.COEFFICIENT);
+        return fuelTank.getWeight() + (int) (1000 * brand.COEFFICIENT);
     }
 
     @Override
     public int getCost() {
-        return fuelTank.getCost() + (int) (400 * brand.COEFFICIENT);
+        return fuelTank.getCost() + (int) (8000 * brand.COEFFICIENT);
     }
 
     @Override

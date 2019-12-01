@@ -1,32 +1,37 @@
 package ru.nsu.programming.space_ship.builders;
 import ru.nsu.programming.space_ship.*;
+import ru.nsu.programming.space_ship.engine.Engine;
 
 public class SpaceshipBuilderCost extends AbstractSpaceShipBuilder {
 
     @Override
     public Error status() {
-        if (engine.getThrottle() > body.getWeight() + engine.getWeight() + fuelTank.getWeight()) {
-            return super.status();
-        } else {
+        if (body == null) {
+            return Error.NO_BODY;
+        } else if (engine == null) {
+            return Error.NO_ENGINE;
+        } else if (fuelTank == null) {
+            return Error.NO_FUEL_TANK;
+        } else if (engine.getThrottle() <= body.getWeight() + engine.getWeight() + fuelTank.getWeight()) {
             return Error.NOT_ENOUGH_THROTTLE;
+        } else {
+            return super.status();
         }
     }
 
-    public void printCost() {
-        System.out.println("The cost is - " + engine.getCost() + body.getCost() + fuelTank.getCost());
+    private void printCost() {
+        System.out.println("The cost is - " + (engine.getCost() + body.getCost() + fuelTank.getCost()));
     }
 
     @Override
     public Spaceship getSpaceship() {
         if (status() == Error.NO_ERROR) {
             printCost();
-            try {
-                return new Spaceship(engine, body, fuelTank);
-            } finally {
-                engine = engine.clone();
-                body = body.clone();
-                fuelTank = fuelTank.clone();
-            }
+            engine = engine.clone();
+            body = body.clone();
+            fuelTank = fuelTank.clone();
+
+            return new Spaceship(body, engine, fuelTank);
         } else {
             throw new IllegalStateException(status().MESSAGE);
         }
