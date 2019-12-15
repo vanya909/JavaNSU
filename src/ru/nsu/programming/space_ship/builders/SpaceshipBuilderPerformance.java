@@ -17,11 +17,7 @@ public class SpaceshipBuilderPerformance extends AbstractSpaceShipBuilder {
     public Spaceship getSpaceship() {
         if (status() == Error.NO_ERROR) {
             printFlightPerformance();
-            engine = engine.clone();
-            body = body.clone();
-            fuelTank = fuelTank.clone();
-
-            return new Spaceship(body, engine, fuelTank);
+            return new Spaceship(body.clone(), engine.clone(), fuelTank.clone());
         } else {
             throw new IllegalStateException(status().MESSAGE);
         }
